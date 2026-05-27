@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Imobiliária Rosana Melo | Porto Setúbal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <link rel="shortcut icon" href="/assets/img/icones/apartamento.png" type="image/x-icon">
+
+  <style>
+    /* =========================================
+    RESET E ESTRUTURA GLOBAL
+    ========================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+
+      --orange: #ef7d1a;
+      --orange-light: #ffb067;
+
+      --green: #25d366;
+
+      --bg: #f7f6f2;
+      /* Cinza claro padrão */
+
+      --text: #1e1e1e;
+      --text-light: #707070;
+
+    }
+
+    body {
+
+      font-family: 'Inter', sans-serif;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      overflow-x: hidden;
+
+      cursor: none;
+
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+
+    .container {
+
+      width: 92%;
+      max-width: 1320px;
+
+      margin: auto;
+
+    }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .cursor {
+
+      width: 18px;
+      height: 18px;
+
+      border: 2px solid var(--orange);
+
+      border-radius: 50%;
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      transform: translate(-50%, -50%);
+
+      pointer-events: none;
+
+      z-index: 999999999;
+
+      transition:
+        width .25s ease,
+        height .25s ease,
+        background .25s ease;
+
+      will-change: transform;
+
+    }
+
+    /* =========================================
+    SCROLL
+    ========================================= */
+
+    .scroll-progress {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 0%;
+      height: 4px;
+
+      background:
+        linear-gradient(90deg,
+          var(--orange),
+          var(--orange-light));
+
+      z-index: 999999;
+
+    }
+
+    /* =========================================
+    HEADER
+    ========================================= */
+
+    header {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 9999;
+
+      transition: .4s;
+
+    }
+
+    header.scrolled {
+
+      background: rgba(255, 255, 255, .92);
+
+      backdrop-filter: blur(16px);
+
+      box-shadow:
+        0 10px 40px rgba(0, 0, 0, .05);
+
+    }
+
+    .navbar {
+
+      height: 88px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+    }
+
+    .logo {
+
+      display: flex;
+      align-items: center;
+
+      gap: 14px;
+
+    }
+
+    .logo img {
+
+      width: 120px;
+
+      object-fit: contain;
+
+    }
+
+    .creci {
+
+      color: #fff;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      transition: .3s;
+
+    }
+
+    header.scrolled .creci {
+      color: var(--text);
+    }
+
+    nav {
+
+      display: flex;
+
+      gap: 34px;
+
+    }
+
+    nav a {
+
+      color: #fff;
+
+      font-size: 15px;
+      font-weight: 600;
+
+      position: relative;
+
+      transition: .3s;
+
+    }
+
+    header.scrolled nav a {
+      color: var(--text);
+    }
+
+    nav a::after {
+
+      content: '';
+
+      position: absolute;
+
+      left: 0;
+      bottom: -8px;
+
+      width: 0;
+      height: 2px;
+
+      background: var(--orange);
+
+      transition: .4s;
+
+    }
+
+    nav a:hover {
+
+      color: var(--orange);
+
+    }
+
+    nav a:hover::after {
+
+      width: 100%;
+
+    }
+
+    .header-cta {
+
+      height: 54px;
+
+      padding: 0 28px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(135deg,
+          var(--orange),
+          var(--orange-light));
+
+      color: #fff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      transition: .4s;
+
+    }
+
+    .header-cta:hover {
+
+      transform: translateY(-5px);
+
+    }
+
+    /* =========================================
+    MENU MOBILE
+    ========================================= */
+
+    .menu-toggle {
+
+      width: 48px;
+      height: 48px;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+
+      z-index: 100001;
+      background: transparent;
+
+    }
+
+    .menu-toggle span {
+
+      position: absolute;
+
+      width: 30px;
+      height: 2px;
+
+      border-radius: 10px;
+
+      background: #fff;
+
+      transition: .45s;
+
+    }
+
+    header.scrolled .menu-toggle span {
+      background: var(--orange);
+    }
+
+    .menu-toggle span:nth-child(1) {
+      transform: translateY(-8px);
+    }
+
+    .menu-toggle span:nth-child(3) {
+      transform: translateY(8px);
+    }
+
+    .menu-toggle.active span {
+      background: var(--orange);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+
+    .menu-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      /* Transparência removida, agora é fundo branco sólido */
+      background: #ffffff;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: .45s;
+
+    }
+
+    .menu-overlay.active {
+
+      opacity: 1;
+      visibility: visible;
+
+    }
+
+    .mobile-menu {
+
+      position: fixed;
+
+      inset: 0;
+
+      display: flex;
+      align-items: center;
+
+      z-index: 9998;
+
+      pointer-events: none;
+
+    }
+
+    .mobile-menu.active {
+      pointer-events: all;
+    }
+
+    .mobile-menu-content {
+
+      width: 100%;
+
+      padding: 0 8%;
+
+    }
+
+    .mobile-menu a {
+
+      display: flex;
+      align-items: center;
+
+      gap: 18px;
+
+      padding: 24px 0;
+
+      border-bottom:
+        1px solid rgba(0, 0, 0, .08);
+
+      color: var(--text);
+
+      font-size: 34px;
+      font-weight: 700;
+
+      opacity: 0;
+
+      transform: translateX(-40px);
+
+      transition:
+        .45s cubic-bezier(.22, 1, .36, 1);
+
+    }
+
+    .mobile-menu.active a {
+
+      opacity: 1;
+
+      transform: translateX(0);
+
+    }
+
+    .mobile-menu.active a:nth-child(1) {
+      transition-delay: .08s;
+    }
+
+    .mobile-menu.active a:nth-child(2) {
+      transition-delay: .14s;
+    }
+
+    .mobile-menu.active a:nth-child(3) {
+      transition-delay: .20s;
+    }
+
+    .mobile-menu.active a:nth-child(4) {
+      transition-delay: .26s;
+    }
+
+    .mobile-menu.active a:nth-child(5) {
+      transition-delay: .32s;
+    }
+
+    .mobile-menu.active a:nth-child(6) {
+      transition-delay: .38s;
+    }
+
+    .mobile-menu a span {
+
+      color: var(--orange);
+
+      font-size: 13px;
+      font-weight: 700;
+
+      min-width: 28px;
+
+    }
+
+    .mobile-menu a:hover {
+
+      color: var(--orange);
+
+      padding-left: 12px;
+
+    }
+
+    /* =========================================
+    HERO
+    ========================================= */
+
+    .hero {
+
+      min-height: 100vh;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+    }
+
+    .hero-bg {
+
+      position: absolute;
+      inset: 0;
+
+      z-index: -2;
+
+    }
+
+    .hero-bg img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      animation: zoomHero 18s ease-in-out infinite alternate;
+
+    }
+
+    .hero-overlay {
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(to bottom,
+          rgba(0, 0, 0, .45),
+          rgba(0, 0, 0, .82));
+
+      z-index: -1;
+
+    }
+
+    .hero-content {
+
+      max-width: 760px;
+
+      padding-top: 90px;
+
+    }
+
+    .hero-badge {
+
+      display: inline-flex;
+      align-items: center;
+
+      gap: 12px;
+
+      background: rgba(255, 255, 255, .08);
+
+      border: 1px solid rgba(255, 255, 255, .14);
+
+      color: #fff;
+
+      padding: 14px 22px;
+
+      border-radius: 100px;
+
+      margin-bottom: 28px;
+
+    }
+
+    .hero h1 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 92px;
+
+      line-height: .95;
+
+      color: #fff;
+
+      margin-bottom: 24px;
+
+    }
+
+    .hero p {
+
+      color: rgba(255, 255, 255, .84);
+
+      line-height: 1.9;
+
+      font-size: 18px;
+
+      margin-bottom: 34px;
+
+    }
+
+    .hero-features {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin-bottom: 40px;
+
+    }
+
+    .hero-features span {
+
+      background: rgba(255, 255, 255, .08);
+
+      border: 1px solid rgba(255, 255, 255, .12);
+
+      color: #fff;
+
+      padding: 14px 18px;
+
+      border-radius: 100px;
+
+      font-size: 14px;
+      font-weight: 700;
+
+    }
+
+    .hero-buttons {
+
+      display: flex;
+
+      gap: 18px;
+
+    }
+
+    .btn {
+
+      height: 60px;
+
+      padding: 0 32px;
+
+      border-radius: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 12px;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      transition: .4s;
+
+    }
+
+    .btn-primary {
+
+      background:
+        linear-gradient(135deg,
+          var(--orange),
+          var(--orange-light));
+
+      color: #fff;
+
+    }
+
+    .btn-primary:hover {
+
+      transform: translateY(-5px);
+
+    }
+
+    .btn-secondary {
+
+      background: rgba(255, 255, 255, .08);
+
+      border: 1px solid rgba(255, 255, 255, .14);
+
+      color: #fff;
+
+    }
+
+    /* =========================================
+    SECTION TITLE
+    ========================================= */
+
+    .section-title {
+
+      text-align: center;
+
+      margin-bottom: 70px;
+
+    }
+
+    .section-title h2 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 64px;
+
+      margin-bottom: 18px;
+
+    }
+
+    .section-title p {
+
+      max-width: 760px;
+
+      margin: auto;
+
+      line-height: 1.9;
+
+      color: var(--text-light);
+
+    }
+
+    /* =========================================
+    DIFERENCIAIS
+    ========================================= */
+
+    #diferenciais {
+      background: var(--bg);
+    }
+
+    .features-grid {
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 26px;
+
+    }
+
+    .feature-card {
+
+      background: #fff;
+
+      border-radius: 34px;
+
+      padding: 38px;
+
+      border: 1px solid rgba(0, 0, 0, .05);
+
+      transition: .45s;
+
+    }
+
+    .feature-card:hover {
+
+      transform: translateY(-10px);
+
+      border-color: rgba(239, 125, 26, .18);
+
+      box-shadow:
+        0 25px 60px rgba(239, 125, 26, .10);
+
+    }
+
+    .feature-icon {
+
+      width: 74px;
+      height: 74px;
+
+      border-radius: 22px;
+
+      background: rgba(239, 125, 26, .08);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--orange);
+
+      font-size: 28px;
+
+      margin-bottom: 24px;
+
+    }
+
+    .feature-card h3 {
+
+      font-size: 28px;
+
+      margin-bottom: 18px;
+
+    }
+
+    .feature-card ul {
+
+      padding-left: 18px;
+
+      line-height: 2;
+
+      color: var(--text-light);
+
+    }
+
+    /* =========================================
+    GALERIA DESKTOP
+    ========================================= */
+
+    #galeria {
+      background-color: #ffffff !important;
+      width: 100vw !important;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    #galeria .container {
+      max-width: 1320px;
+      width: 92%;
+      margin: auto;
+      background-color: #ffffff !important;
+    }
+
+    .gallery-container {
+      position: relative;
+      width: 100%;
+      background-color: #ffffff !important;
+    }
+
+    .gallery-track {
+
+      display: flex;
+
+      gap: 24px;
+
+      overflow-x: auto;
+
+      scroll-snap-type: x mandatory;
+
+      padding: 10px 0 30px;
+
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      background-color: #ffffff !important;
+
+    }
+
+    .gallery-track::-webkit-scrollbar,
+    .plants-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-track img {
+
+      width: 100%;
+      max-width: 100%;
+
+      height: 620px;
+
+      object-fit: cover;
+
+      border-radius: 38px;
+
+      flex: 0 0 100%;
+
+      scroll-snap-align: center;
+
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, .12);
+
+    }
+
+    /* =========================================
+    PLANTAS DESKTOP
+    ========================================= */
+
+    #plantas {
+      background-color: #ffffff !important;
+      width: 100vw !important;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    #plantas .container {
+      max-width: 1320px;
+      width: 92%;
+      margin: auto;
+      background-color: #ffffff !important;
+    }
+
+    .plants-slider {
+      position: relative;
+      width: 100%;
+      background-color: #ffffff !important;
+    }
+
+    .plants-track {
+
+      display: flex;
+
+      gap: 24px;
+
+      overflow-x: auto;
+
+      scroll-snap-type: none;
+
+      padding: 10px 0 30px;
+
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      background-color: #ffffff !important;
+
+    }
+
+    .plant-card {
+
+      flex: 0 0 400px;
+      width: 400px;
+
+      background: #ffffff;
+
+      border-radius: 38px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, .06);
+
+      transition: .45s;
+
+    }
+
+    .plant-card:hover {
+
+      transform: translateY(-8px);
+
+      box-shadow:
+        0 25px 60px rgba(239, 125, 26, .12);
+
+    }
+
+    .plant-image {
+
+      width: 100%;
+      height: 420px;
+      padding: 30px 30px 10px 30px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+    }
+
+    .plant-image img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: block;
+
+    }
+
+    .plant-info {
+
+      padding: 24px 34px 24px 34px;
+      background: #ffffff;
+      text-align: center;
+
+    }
+
+    .plant-info h3 {
+
+      font-size: 20px;
+      margin-bottom: 0;
+
+    }
+
+    /* =========================================
+    MODAL DE IMAGEM
+    ========================================= */
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .gallery-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .gallery-modal-img {
+      max-width: 94%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 12px;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-modal.active .gallery-modal-img {
+      transform: scale(1);
+    }
+
+    .gallery-modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    /* =========================================
+    FOCO EXCLUSIVO MOBILE (ATÉ 1100PX)
+    ========================================= */
+    @media(max-width:1100px) {
+
+      #galeria {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      #galeria,
+      #galeria * {
+        background-color: #ffffff !important;
+      }
+
+      #galeria .container {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .gallery-track {
+        display: flex !important;
+        gap: 16px !important;
+        padding: 10px 30px 40px 30px !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        background-color: #ffffff !important;
+      }
+
+      .gallery-track img {
+        flex: 0 0 85% !important;
+        width: 85% !important;
+        max-width: 85% !important;
+        height: 380px !important;
+        border-radius: 24px !important;
+        scroll-snap-align: center !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+      }
+
+      .gallery-track::after {
+        content: '';
+        flex: 0 0 15px !important;
+      }
+
+      #plantas {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        background-color: #ffffff !important;
+      }
+
+      #plantas .section-title,
+      #plantas .section-title * {
+        background-color: transparent !important;
+      }
+
+      #plantas .container {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: #ffffff !important;
+      }
+
+      .plants-slider {
+        background-color: #ffffff !important;
+      }
+
+      .plants-track {
+        display: flex !important;
+        gap: 16px !important;
+        padding: 10px 30px 40px 30px !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        background-color: #ffffff !important;
+      }
+
+      .plant-card {
+        flex: 0 0 85% !important;
+        width: 85% !important;
+        max-width: 85% !important;
+        border-radius: 24px !important;
+        scroll-snap-align: center !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06) !important;
+      }
+
+      .plant-image {
+        height: 280px !important;
+        padding: 20px 20px 5px 20px !important;
+        border-radius: 24px 24px 0 0 !important;
+        background-color: #ffffff !important;
+      }
+
+      .plant-image img {
+        height: 100% !important;
+        object-fit: contain !important;
+        background-color: #ffffff !important;
+      }
+
+      .plant-info,
+      .plant-info * {
+        background-color: #ffffff !important;
+      }
+
+      .plants-track::after {
+        content: '';
+        flex: 0 0 15px !important;
+      }
+
+      #galeria .section-title,
+      #plantas .section-title {
+        padding: 0 6% !important;
+        margin-bottom: 40px !important;
+      }
+
+    }
+
+    @media(max-width:580px) {
+      .gallery-track img {
+        height: 260px !important;
+      }
+
+      .plant-image {
+        height: 210px !important;
+      }
+    }
+
+    /* =========================================
+    ARROWS
+    ========================================= */
+
+    .gallery-arrow,
+    .plants-arrow {
+
+      position: absolute;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      width: 60px;
+      height: 60px;
+
+      border-radius: 50%;
+
+      background: #fff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--orange);
+
+      font-size: 22px;
+
+      z-index: 10;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, .08);
+
+      transition: .35s;
+
+    }
+
+    .gallery-arrow:hover,
+    .plants-arrow:hover {
+
+      transform:
+        translateY(-50%) scale(1.08);
+
+    }
+
+    .left {
+      left: 20px;
+    }
+
+    .right {
+      right: 20px;
+    }
+
+    @media(max-width:1100px) {
+
+      .gallery-arrow,
+      .plants-arrow {
+        display: none !important;
+      }
+    }
+
+    /* =========================================
+    MAPA
+    ========================================= */
+
+    #localizacao {
+      background: #ffffff;
+    }
+
+    .location-title {
+
+      text-align: center;
+
+      margin-bottom: 40px;
+
+    }
+
+    .location-title h2 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 64px;
+
+      margin-bottom: 18px;
+
+    }
+
+    .location-title p {
+
+      max-width: 700px;
+
+      margin: auto;
+
+      line-height: 1.9;
+
+      color: var(--text-light);
+
+    }
+
+    .map {
+
+      width: 100%;
+      max-width: 1000px;
+
+      margin: auto;
+
+      overflow: hidden;
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 20px 70px rgba(0, 0, 0, .08);
+
+    }
+
+    .map iframe {
+
+      width: 100%;
+      height: 450px;
+
+      border: none;
+
+      display: block;
+
+    }
+
+    /* =========================================
+    FORM
+    ========================================= */
+
+    #contato {
+      background: var(--bg);
+    }
+
+    .contact-grid {
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 40px;
+
+      align-items: center;
+
+    }
+
+    .contact-form {
+
+      background: #fff;
+
+      border-radius: 40px;
+
+      padding: 42px;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, .06);
+
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+
+      width: 100%;
+
+      border: none;
+
+      background: #f4f4f4;
+
+      padding: 18px;
+
+      border-radius: 18px;
+
+      margin-bottom: 18px;
+
+      outline: none;
+
+      font-size: 15px;
+
+    }
+
+    .contact-form textarea {
+
+      min-height: 160px;
+
+      resize: none;
+
+    }
+
+    /* =========================================
+    FOOTER
+    ========================================= */
+
+    footer {
+
+      background: #fff;
+
+      padding: 70px 0 40px;
+
+      border-top: 1px solid rgba(0, 0, 0, .05);
+
+    }
+
+    .footer-content {
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 50px;
+
+      margin-bottom: 40px;
+
+    }
+
+    .footer-logo img {
+
+      width: 140px;
+
+    }
+
+    .footer-logo p {
+
+      margin-top: 20px;
+
+      color: var(--text-light);
+
+      line-height: 1.8;
+
+      max-width: 320px;
+
+    }
+
+    .footer-links {
+
+      display: flex;
+
+      gap: 80px;
+
+    }
+
+    .footer-column h4 {
+
+      margin-bottom: 18px;
+
+    }
+
+    .footer-column a {
+
+      display: block;
+
+      margin-bottom: 12px;
+
+      color: var(--text-light);
+
+      transition: .3s;
+
+    }
+
+    .footer-column a:hover {
+
+      color: var(--orange);
+
+    }
+
+    .footer-bottom {
+
+      padding-top: 30px;
+
+      border-top: 1px solid rgba(0, 0, 0, .06);
+
+      text-align: center;
+
+      color: #777;
+
+    }
+
+    /* =========================================
+    MOBILE BAR
+    ========================================= */
+
+    .mobile-bar {
+
+      position: fixed;
+
+      left: 50%;
+      bottom: 20px;
+
+      transform: translateX(-50%);
+
+      width: 92%;
+
+      background: rgba(255, 255, 255, .92);
+
+      backdrop-filter: blur(18px);
+
+      border-radius: 24px;
+
+      padding: 12px;
+
+      display: none;
+
+      gap: 10px;
+
+      z-index: 99999;
+
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, .08);
+
+    }
+
+    .mobile-bar.hide {
+
+      opacity: 0;
+
+      pointer-events: none;
+
+    }
+
+    .mobile-bar a {
+
+      flex: 1;
+
+      height: 54px;
+
+      border-radius: 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      font-size: 14px;
+      font-weight: 700;
+
+    }
+
+    .mobile-agendar {
+
+      background:
+        linear-gradient(135deg,
+          var(--orange),
+          var(--orange-light));
+
+      color: #fff;
+
+    }
+
+    .mobile-whatsapp {
+
+      background: var(--green);
+
+      color: #fff;
+
+    }
+
+    /* =========================================
+    ANIMAÇÃO
+    ========================================= */
+
+    @keyframes zoomHero {
+
+      from {
+        transform: scale(1.03);
+      }
+
+      to {
+        transform: scale(1.12);
+      }
+
+    }
+
+    /* =========================================
+    BOTÃO WHATSAPP (DESKTOP)
+    ========================================= */
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 65px;
+      height: 65px;
+      background-color: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+      z-index: 99990;
+      transition: 0.35s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 20px 45px rgba(37, 211, 102, 0.45);
+      color: #fff;
+    }
+
+    @media(max-width: 768px) {
+      .whatsapp-float {
+        display: none;
+      }
+    }
+
+    /* =========================================
+    RESPONSIVO ADICIONAL GERAL
+    ========================================= */
+
+    @media(max-width:1100px) {
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor {
+        display: none;
+      }
+
+      nav,
+      .header-cta,
+      .creci {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .navbar {
+
+        justify-content: center;
+
+        position: relative;
+
+      }
+
+      .logo {
+
+        position: absolute;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+      }
+
+      .logo img {
+        width: 110px;
+      }
+
+      .menu-toggle {
+
+        position: absolute;
+
+        right: 0;
+
+      }
+
+      .features-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 68px;
+      }
+
+    }
+
+    @media(max-width:768px) {
+
+      section {
+        padding: 80px 0;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .section-title h2,
+      .location-title h2 {
+        font-size: 42px;
+      }
+
+      .map iframe {
+        height: 360px;
+      }
+
+      .mobile-bar {
+        display: flex;
+      }
+
+      .footer-content {
+
+        flex-direction: column;
+
+      }
+
+      .footer-links {
+
+        flex-direction: column;
+
+        gap: 24px;
+
+      }
+
+    }
+
+    @media(max-width:480px) {
+
+      .btn {
+        width: 100%;
+      }
+
+      .mobile-menu a {
+        font-size: 28px;
+      }
+
+    }
+
+    .mobile-bar {
+      transition:
+        opacity .35s ease,
+        transform .35s ease;
+    }
+
+    .mobile-bar.hide {
+
+      opacity: 0;
+
+      transform:
+        translateX(-50%) translateY(30px);
+
+      pointer-events: none;
+
+    }
+
+    /* =========================================
+FIX MENU MOBILE
+========================================= */
+
+    header {
+
+      z-index: 100000 !important;
+
+    }
+
+    .menu-toggle {
+
+      z-index: 100001 !important;
+
+    }
+
+    .mobile-menu {
+
+      z-index: 99998 !important;
+
+    }
+
+    .menu-overlay {
+
+      z-index: 99997 !important;
+
+    }
+
+    /* =========================================
+CORREÇÃO STACKING CONTEXT
+========================================= */
+
+    #galeria,
+    #plantas,
+    .gallery-track,
+    .plants-track {
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="gallery-modal" id="galleryModal">
+    <button class="gallery-modal-close" id="closeModal">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img src="" class="gallery-modal-img" id="modalImg" alt="Visualização expandida">
+  </div>
+
+  <header id="header">
+
+    <div class="container navbar">
+
+      <div class="logo">
+
+        <img src="/assets/img/logo/logo-laranja.png">
+
+        <span class="creci">
+          CRECI 15421 PJ
+        </span>
+
+      </div>
+
+      <nav>
+
+        <a href="#inicio">Início</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#plantas">Plantas</a>
+        <a href="#localizacao">Localização</a>
+        <a href="#contato">Contato</a>
+
+      </nav>
+
+      <a href="#contato" class="header-cta">
+        Agendar Visita
+      </a>
+
+      <button class="menu-toggle" id="menuToggle">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+
+    <div class="mobile-menu-content">
+
+      <a href="#inicio"><span>01</span>Início</a>
+      <a href="#diferenciais"><span>02</span>Diferenciais</a>
+      <a href="#galeria"><span>03</span>Galeria</a>
+      <a href="#plantas"><span>04</span>Plantas</a>
+      <a href="#localizacao"><span>05</span>Localização</a>
+      <a href="#contato"><span>06</span>Contato</a>
+
+    </div>
+
+  </div>
+
+  <section class="hero" id="inicio">
+
+    <div class="hero-bg">
+
+      <img src="/assets/img/perspectivas/sala-2.jpeg">
+
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+
+      <div class="hero-content">
+
+        <div class="hero-badge">
+          Alto padrão • Exclusividade • Sofisticação
+        </div>
+
+        <h1>
+          Edf. Porto Setúbal
+        </h1>
+
+        <p>
+          Um empreendimento pensado para quem valoriza conforto,
+          sofisticação e localização privilegiada.
+        </p>
+
+        <div class="hero-features">
+
+          <span>2 quartos ou 2 quartos + office</span>
+          <span>72,22 e 56,20m²</span>
+          <span>Suíte</span>
+          <span>Cozinha</span>
+          <span>Área de serviço</span>
+          <span>Lazer completo</span>
+
+        </div>
+
+        <div class="hero-buttons">
+
+          <a href="#contato" class="btn btn-primary">
+            Agendar Visita
+          </a>
+
+          <a href="#galeria" class="btn btn-secondary">
+            Ver Galeria
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="diferenciais">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Diferenciais do empreendimento</h2>
+
+        <p>
+          Cada detalhe foi pensado para entregar uma experiência premium.
+        </p>
+
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            <i class="fa-solid fa-building"></i>
+          </div>
+
+          <h3>Arquitetura moderna</h3>
+
+          <ul>
+            <li>Projeto moderno</li>
+            <li>Apartamentos inteligentes com office/closet</li>
+            <li>Áreas comuns decoradas e ambientadas</li>
+          </ul>
+
+        </div>
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+
+          <h3>Segurança</h3>
+
+          <ul>
+            <li>Recepção com front desk e controle de acesso</li>
+            <li>Localização em área residencial tranquila de Setúbal</li>
+            <li>Estrutura vertical com apenas 4 apartamentos por andar</li>
+          </ul>
+
+        </div>
+
+        <div class="feature-card">
+
+          <div class="feature-icon">
+            <i class="fa-solid fa-water-ladder"></i>
+          </div>
+
+          <h3>Lazer completo</h3>
+
+          <ul>
+            <li>Piscina com deck</li>
+            <li>Wine Garden + Espaço Gourmet com Grill/Pizza</li>
+            <li>Espaço Gourmet - Cobertura</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="galeria">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Galeria do empreendimento</h2>
+
+        <p>
+          Explore os ambientes e descubra uma experiência única.
+        </p>
+
+      </div>
+
+      <div class="gallery-container">
+
+        <button class="gallery-arrow left gallery-prev">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button class="gallery-arrow right gallery-next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="gallery-track">
+
+          <img src="/assets/img/perspectivas/piscina.jpg">
+
+          <img src="/assets/img/perspectivas/academia.jpg">
+
+          <img src="/assets/img/perspectivas/area-pet.jpg">
+
+          <img src="/assets/img/perspectivas/brinquedoteca.jpg">
+
+          <img src="/assets/img/perspectivas/espaco-gourmet.jpg">
+
+          <img src="/assets/img/perspectivas/espaco-teens.jpg">
+
+          <img src="/assets/img/perspectivas/delivery.jpeg">
+
+          <img src="/assets/img/perspectivas/hall.jpg">
+
+          <img src="/assets/img/perspectivas/entrada.jpeg">
+
+          <img src="/assets/img/perspectivas/fachada.jpg">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="plantas">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>Plantas do apartamento</h2>
+
+        <p>
+          Conheça os layouts inteligentes desenvolvidos para proporcionar amplitude,
+          conforto e sofisticação.
+        </p>
+
+      </div>
+
+      <div class="plants-slider">
+
+        <button class="plants-arrow left plants-prev">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button class="plants-arrow right plants-next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="plants-track">
+
+          <div class="plant-card">
+
+            <div class="plant-image">
+
+              <img src="/assets/img/plantas/planta-101-1201.jpg">
+
+            </div>
+
+            <div class="plant-info">
+
+              <h3>Planta Tipo 01</h3>
+
+            </div>
+
+          </div>
+
+          <div class="plant-card">
+
+            <div class="plant-image">
+
+              <img src="/assets/img/plantas/apto-102-1202.jpg">
+
+            </div>
+
+            <div class="plant-info">
+
+              <h3>Planta Tipo 02</h3>
+
+            </div>
+
+          </div>
+
+          <div class="plant-card">
+
+            <div class="plant-image">
+
+              <img src="/assets/img/plantas/apto-103-1203.jpg">
+
+            </div>
+
+            <div class="plant-info">
+
+              <h3>Planta Tipo 03</h3>
+
+            </div>
+
+          </div>
+
+          <div class="plant-card">
+
+            <div class="plant-image">
+
+              <img src="/assets/img/plantas/apto-104-1204.jpg">
+
+            </div>
+
+            <div class="plant-info">
+
+              <h3>Planta Tipo 04</h3>
+
+            </div>
+
+          </div>
+
+          <div class="plant-card">
+
+            <div class="plant-image">
+
+              <img src="/assets/img/plantas/planta-baixa.jpg">
+
+            </div>
+
+            <div class="plant-info">
+
+              <h3>Planta Geral do Pavimento</h3>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="localizacao">
+
+    <div class="container">
+
+      <div class="location-title">
+
+        <h2>Localização privilegiada</h2>
+
+        <p>
+          Próximo aos melhores serviços e conveniências.
+        </p>
+
+      </div>
+
+      <div class="map">
+
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.6066379259314!2d-34.91513818502424!3d-8.141466191593521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1f0e0b0116dd%3A0x963b1c904ae150e5!2sEdif%C3%ADcio%20Porto%20Set%C3%BAbal!5e0!3m2!1sen!2sbr!4v1779904371683!5m2!1sen!2sbr"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="contato">
+
+    <div class="container">
+
+      <div class="contact-grid">
+
+        <div>
+
+          <div class="section-title" style="text-align:left;margin-bottom:20px;">
+
+            <h2>Agende sua visita</h2>
+
+            <p style="margin:0;">
+              Receba atendimento personalizado e descubra todos os detalhes.
+            </p>
+
+          </div>
+
+        </div>
+
+        <form class="contact-form">
+
+          <input type="text" placeholder="Seu nome">
+
+          <input type="tel" placeholder="Seu WhatsApp">
+
+          <input type="email" placeholder="Seu e-mail">
+
+          <textarea placeholder="Mensagem"></textarea>
+
+          <button class="btn btn-primary" style="width:100%;">
+            Solicitar atendimento
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-content">
+
+        <div class="footer-logo">
+
+          <img src="/assets/img/logo/logo-laranja.png">
+
+          <p>
+            Especialistas em imóveis de alto padrão e experiências exclusivas.
+          </p>
+
+        </div>
+
+        <div class="footer-links">
+
+          <div class="footer-column">
+
+            <h4>Site</h4>
+
+            <a href="#">Início</a>
+            <a href="https://rosanameloimobiliaria.com.br/imoveis.php?para=vender" target="_blank">Empreendimentos</a>
+            <a href="#contato">Contato</a>
+
+          </div>
+
+          <div class="footer-column">
+
+            <h4>Redes sociais</h4>
+
+            <a href="https://www.instagram.com/imobiliariarosanamelo/" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/rmimoveispe" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/@imobiliariacafeteriarosanamelo" target="_blank">YouTube</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 • Todos os direitos reservados
+      </div>
+
+    </div>
+
+  </footer>
+
+  <a href="https://wa.me/5581993939180?text=Oi!%20Acabei%20de%20ver%20o%20Edf.%20Porto%20Set%C3%BAbal%20no%20site%20e%20tenho%20interesse%20em%20conhecer%20o%20empreendimento.%20Gostaria%20de%20agendar%20uma%20visita,%20por%20favor."
+    class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <div class="mobile-bar" id="mobileBar">
+
+    <a href="#contato" class="mobile-agendar">
+      <i class="fa-solid fa-calendar-days"></i>
+      Agendar
+    </a>
+
+    <a href="https://wa.me/5581993939180?text=Oi!%20Acabei%20de%20ver%20o%20Edf.%20Porto%20Set%C3%BAbal%20no%20site%20e%20tenho%20interesse%20em%20conhecer%20o%20empreendimento.%20Gostaria%20de%20agendar%20uma%20visita,%20por%20favor."
+      class="mobile-whatsapp" target="_blank">
+
+      <i class="fa-brands fa-whatsapp"></i>
+      WhatsApp
+
+    </a>
+
+  </div>
+
+  <script>
+
+    /* =========================================
+    CURSOR
+    ========================================= */
+
+    const cursor =
+      document.getElementById('cursor');
+
+    if (window.innerWidth > 1100) {
+
+      document.addEventListener('mousemove', (e) => {
+
+        cursor.style.left =
+          e.clientX + 'px';
+
+        cursor.style.top =
+          e.clientY + 'px';
+
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('active');
+        });
+
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('active');
+        });
+
+      });
+
+    }
+
+    /* =========================================
+    HEADER
+    ========================================= */
+
+    const header =
+      document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+
+      if (window.scrollY > 50) {
+
+        header.classList.add('scrolled');
+
+      } else {
+
+        header.classList.remove('scrolled');
+
+      }
+
+    });
+
+    /* =========================================
+    SCROLL PROGRESS
+    ========================================= */
+
+    window.addEventListener('scroll', () => {
+
+      const winScroll =
+        document.body.scrollTop ||
+        document.documentElement.scrollTop;
+
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+      const scrolled =
+        (winScroll / height) * 100;
+
+      document.getElementById('scrollProgress')
+        .style.width = scrolled + '%';
+
+    });
+
+    /* =========================================
+    MENU MOBILE
+    ========================================= */
+
+    const menuToggle =
+      document.getElementById('menuToggle');
+
+    const mobileMenu =
+      document.getElementById('mobileMenu');
+
+    const menuOverlay =
+      document.getElementById('menuOverlay');
+
+    function openMenu() {
+
+      mobileMenu.classList.add('active');
+
+      menuOverlay.classList.add('active');
+
+      menuToggle.classList.add('active');
+
+      document.body.style.overflow = 'hidden';
+
+    }
+
+    function closeMenu() {
+
+      mobileMenu.classList.remove('active');
+
+      menuOverlay.classList.remove('active');
+
+      menuToggle.classList.remove('active');
+
+      document.body.style.overflow = '';
+
+    }
+
+    menuToggle.addEventListener('click', () => {
+
+      if (menuToggle.classList.contains('active')) {
+
+        closeMenu();
+
+      } else {
+
+        openMenu();
+
+      }
+
+    });
+
+    menuOverlay.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.mobile-menu a')
+      .forEach(link => {
+
+        link.addEventListener('click', closeMenu);
+
+      });
+
+    /* =========================================
+    GALERIA INFINITA
+    ========================================= */
+
+    const galleryTrack =
+      document.querySelector('.gallery-track');
+
+    const galleryPrev =
+      document.querySelector('.gallery-prev');
+
+    const galleryNext =
+      document.querySelector('.gallery-next');
+
+    if (galleryTrack && galleryPrev && galleryNext) {
+
+      const galleryImages =
+        galleryTrack.querySelectorAll('img');
+
+      let currentGallery = 0;
+
+      function getGalleryScrollValue() {
+
+        const imageWidth =
+          galleryImages[0].offsetWidth;
+
+        const gap = 24;
+
+        return imageWidth + gap;
+
+      }
+
+      function updateGallery() {
+
+        galleryTrack.scrollTo({
+
+          left:
+            currentGallery *
+            getGalleryScrollValue(),
+
+          behavior: 'smooth'
+
+        });
+
+      }
+
+      galleryNext.addEventListener('click', () => {
+
+        currentGallery++;
+
+        if (currentGallery >= galleryImages.length) {
+
+          currentGallery = 0;
+
+        }
+
+        updateGallery();
+
+      });
+
+      galleryPrev.addEventListener('click', () => {
+
+        currentGallery--;
+
+        if (currentGallery < 0) {
+
+          currentGallery =
+            galleryImages.length - 1;
+
+        }
+
+        updateGallery();
+
+      });
+
+    }
+
+    /* =========================================
+    PLANTAS INFINITAS
+    ========================================= */
+
+    const plantsTrack =
+      document.querySelector('.plants-track');
+
+    const plantsPrev =
+      document.querySelector('.plants-prev');
+
+    const plantsNext =
+      document.querySelector('.plants-next');
+
+    if (plantsTrack && plantsPrev && plantsNext) {
+
+      const plantCards =
+        plantsTrack.querySelectorAll('.plant-card');
+
+      let currentPlant = 0;
+
+      function getPlantScrollValue() {
+
+        const cardWidth =
+          plantCards[0].offsetWidth;
+
+        const gap = 24;
+
+        return cardWidth + gap;
+
+      }
+
+      function updatePlants() {
+
+        plantsTrack.scrollTo({
+
+          left:
+            currentPlant *
+            getPlantScrollValue(),
+
+          behavior: 'smooth'
+
+        });
+
+      }
+
+      plantsNext.addEventListener('click', () => {
+
+        currentPlant++;
+
+        if (currentPlant >= plantCards.length) {
+
+          currentPlant = 0;
+
+        }
+
+        updatePlants();
+
+      });
+
+      plantsPrev.addEventListener('click', () => {
+
+        currentPlant--;
+
+        if (currentPlant < 0) {
+
+          currentPlant =
+            plantCards.length - 1;
+
+        }
+
+        updatePlants();
+
+      });
+
+    }
+
+    /* =========================================
+    MODAL DAS IMAGENS
+    ========================================= */
+
+    const galleryModal =
+      document.getElementById('galleryModal');
+
+    const modalImg =
+      document.getElementById('modalImg');
+
+    const closeModal =
+      document.getElementById('closeModal');
+
+    document.querySelectorAll(
+      '.gallery-track img, .plant-image img'
+    ).forEach(img => {
+
+      img.style.cursor = 'pointer';
+
+      img.addEventListener('click', () => {
+
+        modalImg.src = img.src;
+
+        galleryModal.classList.add('active');
+
+        document.body.style.overflow = 'hidden';
+
+      });
+
+    });
+
+    function closeGalleryModal() {
+
+      galleryModal.classList.remove('active');
+
+      document.body.style.overflow = '';
+
+    }
+
+    closeModal.addEventListener(
+      'click',
+      closeGalleryModal
+    );
+
+    galleryModal.addEventListener('click', (e) => {
+
+      if (e.target === galleryModal) {
+
+        closeGalleryModal();
+
+      }
+
+    });
+
+    document.addEventListener('keydown', (e) => {
+
+      if (e.key === 'Escape') {
+
+        closeGalleryModal();
+
+      }
+
+    });
+
+    /* =========================================
+  OCULTAR MOBILE BAR NO CONTATO E FOOTER
+  ========================================= */
+
+    const mobileBar =
+      document.getElementById('mobileBar');
+
+    const contatoSection =
+      document.getElementById('contato');
+
+    const footer =
+      document.querySelector('footer');
+
+    function toggleMobileBar() {
+
+      if (window.innerWidth > 768) return;
+
+      const contatoTop =
+        contatoSection.getBoundingClientRect().top;
+
+      const footerTop =
+        footer.getBoundingClientRect().top;
+
+      const windowHeight =
+        window.innerHeight;
+
+      if (
+        contatoTop < windowHeight * 0.8 ||
+        footerTop < windowHeight
+      ) {
+
+        mobileBar.classList.add('hide');
+
+      } else {
+
+        mobileBar.classList.remove('hide');
+
+      }
+
+    }
+
+    window.addEventListener('scroll', toggleMobileBar);
+
+    window.addEventListener('resize', toggleMobileBar);
+
+    toggleMobileBar();
+
+  </script>
+</body>
+
+</html>
