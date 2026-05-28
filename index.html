@@ -17,7 +17,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-  <link rel="shortcut icon" href="./assets/img/icones/apartamento.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/img/icones/apartamento.png" type="image/x-icon">
 
   <style>
     /* =========================================
@@ -113,6 +113,17 @@
         background .25s ease;
 
       will-change: transform;
+
+    }
+
+    .cursor.active {
+
+      width: 60px;
+      height: 60px;
+
+      background: rgba(239, 125, 26, 0.15);
+
+      border-color: var(--orange);
 
     }
 
@@ -1728,8 +1739,8 @@ FIX MENU MOBILE
     }
 
     /* =========================================
-    CORREÇÃO STACKING CONTEXT
-    ========================================= */
+CORREÇÃO STACKING CONTEXT
+========================================= */
 
     #galeria,
     #plantas,
@@ -1764,7 +1775,7 @@ FIX MENU MOBILE
 
       <div class="logo">
 
-        <img src="./assets/img/logo/logo-laranja.png">
+        <img src="/assets/img/logo/logo-laranja.png">
 
         <span class="creci">
           CRECI 15421 PJ
@@ -1820,7 +1831,7 @@ FIX MENU MOBILE
 
     <div class="hero-bg">
 
-      <img src="./assets/img/perspectivas/sala-2.jpeg">
+      <img src="/assets/img/perspectivas/sala-2.jpeg">
 
     </div>
 
@@ -1968,25 +1979,25 @@ FIX MENU MOBILE
 
         <div class="gallery-track">
 
-          <img src="./assets/img/perspectivas/piscina.jpg">
+          <img src="/assets/img/perspectivas/piscina.jpg">
 
-          <img src="./assets/img/perspectivas/academia.jpg">
+          <img src="/assets/img/perspectivas/academia.jpg">
 
-          <img src="./assets/img/perspectivas/area-pet.jpg">
+          <img src="/assets/img/perspectivas/area-pet.jpg">
 
-          <img src="./assets/img/perspectivas/brinquedoteca.jpg">
+          <img src="/assets/img/perspectivas/brinquedoteca.jpg">
 
-          <img src="./assets/img/perspectivas/espaco-gourmet.jpg">
+          <img src="/assets/img/perspectivas/espaco-gourmet.jpg">
 
-          <img src="./assets/img/perspectivas/espaco-teens.jpg">
+          <img src="/assets/img/perspectivas/espaco-teens.jpg">
 
-          <img src="./assets/img/perspectivas/delivery.jpeg">
+          <img src="/assets/img/perspectivas/delivery.jpeg">
 
-          <img src="./assets/img/perspectivas/hall.jpg">
+          <img src="/assets/img/perspectivas/hall.jpg">
 
-          <img src="./assets/img/perspectivas/entrada.jpeg">
+          <img src="/assets/img/perspectivas/entrada.jpeg">
 
-          <img src="./assets/img/perspectivas/fachada.jpg">
+          <img src="/assets/img/perspectivas/fachada.jpg">
 
         </div>
 
@@ -2027,7 +2038,7 @@ FIX MENU MOBILE
 
             <div class="plant-image">
 
-              <img src="./assets/img/plantas/planta-101-1201.jpg">
+              <img src="/assets/img/plantas/planta-101-1201.jpg">
 
             </div>
 
@@ -2043,7 +2054,7 @@ FIX MENU MOBILE
 
             <div class="plant-image">
 
-              <img src="./assets/img/plantas/apto-102-1202.jpg">
+              <img src="/assets/img/plantas/apto-102-1202.jpg">
 
             </div>
 
@@ -2059,7 +2070,7 @@ FIX MENU MOBILE
 
             <div class="plant-image">
 
-              <img src="./assets/img/plantas/apto-103-1203.jpg">
+              <img src="/assets/img/plantas/apto-103-1203.jpg">
 
             </div>
 
@@ -2075,7 +2086,7 @@ FIX MENU MOBILE
 
             <div class="plant-image">
 
-              <img src="./assets/img/plantas/apto-104-1204.jpg">
+              <img src="/assets/img/plantas/apto-104-1204.jpg">
 
             </div>
 
@@ -2091,7 +2102,7 @@ FIX MENU MOBILE
 
             <div class="plant-image">
 
-              <img src="./assets/img/plantas/planta-baixa.jpg">
+              <img src="/assets/img/plantas/planta-baixa.jpg">
 
             </div>
 
@@ -2188,7 +2199,7 @@ FIX MENU MOBILE
 
         <div class="footer-logo">
 
-          <img src="./assets/img/logo/logo-laranja.png">
+          <img src="/assets/img/logo/logo-laranja.png">
 
           <p>
             Especialistas em imóveis de alto padrão e experiências exclusivas.
@@ -2607,8 +2618,8 @@ FIX MENU MOBILE
     });
 
     /* =========================================
-  OCULTAR MOBILE BAR NO CONTATO E FOOTER
-  ========================================= */
+    OCULTAR MOBILE BAR NO CONTATO E FOOTER
+    ========================================= */
 
     const mobileBar =
       document.getElementById('mobileBar');
@@ -2654,8 +2665,8 @@ FIX MENU MOBILE
     toggleMobileBar();
 
     /* =========================================
- FORMULÁRIO GOOGLE SHEETS
- ========================================= */
+    FORMULÁRIO GOOGLE SHEETS
+    ========================================= */
 
     const form =
       document.getElementById('contactForm');
