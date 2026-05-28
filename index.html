@@ -1752,9 +1752,93 @@
       z-index: 1;
 
     }
+
+    /* =========================================
+    CHAT DA GALERIA
+    ========================================= */
+
+    .gallery-chat {
+
+      position: fixed;
+
+      bottom: 120px;
+      left: 50%;
+
+      transform: translateX(-50%) translateY(20px);
+
+      z-index: 999999;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition:
+        opacity .4s ease,
+        transform .4s ease;
+
+    }
+
+    .gallery-chat.show {
+
+      opacity: 1;
+
+      transform: translateX(-50%) translateY(0);
+
+    }
+
+    .gallery-chat-box {
+
+      background: #fff;
+
+      color: #1e1e1e;
+
+      padding: 16px 22px;
+
+      border-radius: 22px;
+
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, .12);
+
+      font-size: 15px;
+      font-weight: 600;
+
+      max-width: 320px;
+
+      line-height: 1.5;
+
+    }
+
+    @media(max-width:768px) {
+
+      .gallery-chat {
+
+        bottom: 100px;
+
+        width: calc(100% - 40px);
+
+      }
+
+      .gallery-chat-box {
+
+        max-width: 100%;
+
+        font-size: 14px;
+
+        padding: 14px 18px;
+
+      }
+
+    }
   </style>
 
 </head>
+
+<div class="gallery-chat" id="galleryChat">
+  <div class="gallery-chat-box">
+    <p>Você Sabia?</p>
+    <p>Esse é o primeiro empreendimento com Espaço Delivery em Setúbal.</p>
+  </div>
+</div>
 
 <body>
 
@@ -2408,6 +2492,9 @@
     const galleryTrack =
       document.querySelector('.gallery-track');
 
+    const galleryChat =
+      document.getElementById('galleryChat');
+
     const galleryPrev =
       document.querySelector('.gallery-prev');
 
@@ -2722,6 +2809,139 @@
       button.disabled = false;
 
     });
+
+    window.addEventListener('scroll', () => {
+
+      const galeria =
+        document.getElementById('galeria');
+
+      const rect =
+        galeria.getBoundingClientRect();
+
+      const saiuDaTela =
+        rect.bottom < 200 ||
+        rect.top > window.innerHeight - 200;
+
+      if (saiuDaTela) {
+
+        clearTimeout(window.chatTimeout);
+
+        galleryChat.classList.remove('show');
+
+      }
+
+    });
+
+    /* =========================================
+    CHAT AUTOMÁTICO DA GALERIA
+    ========================================= */
+
+    const targetImage = 6; /* PARA ESCOLHER A IMAGEM QUE IRÁ EXIBIR A MENSAGEM */
+
+    let chatAlreadyShown = false;
+
+    function handleGalleryChat() {
+
+      const images =
+        galleryTrack.querySelectorAll('img');
+
+      const target =
+        images[targetImage];
+
+      if (!target) return;
+
+      const rect =
+        target.getBoundingClientRect();
+
+      const center =
+        window.innerWidth / 2;
+
+      const visible =
+        rect.left < center &&
+        rect.right > center;
+
+      const galeria =
+        document.getElementById('galeria');
+
+      const galeriaRect =
+        galeria.getBoundingClientRect();
+
+      const galeriaVisible =
+        galeriaRect.top < window.innerHeight &&
+        galeriaRect.bottom > 0;
+
+      /* SAIU DA GALERIA */
+      if (!galeriaVisible) {
+
+        galleryChat.classList.remove('show');
+
+        clearTimeout(window.chatTimeout);
+
+        chatAlreadyShown = false;
+
+        return;
+
+      }
+
+      /* ENTROU NA IMAGEM */
+      if (visible && !chatAlreadyShown) {
+
+        chatAlreadyShown = true;
+
+        galleryChat.classList.add('show');
+
+        clearTimeout(window.chatTimeout);
+
+        window.chatTimeout = setTimeout(() => {
+
+          galleryChat.classList.remove('show');
+
+        }, 5000);
+
+      }
+
+      /* SAIU DA IMAGEM */
+      if (!visible) {
+
+        galleryChat.classList.remove('show');
+
+        clearTimeout(window.chatTimeout);
+
+        chatAlreadyShown = false;
+
+      }
+
+    }
+
+    let galleryTicking = false;
+
+    galleryTrack.addEventListener('scroll', () => {
+
+      if (!galleryTicking) {
+
+        window.requestAnimationFrame(() => {
+
+          handleGalleryChat();
+
+          galleryTicking = false;
+
+        });
+
+        galleryTicking = true;
+
+      }
+
+    });
+
+    window.addEventListener(
+      'scroll',
+      handleGalleryChat
+    );
+
+    window.addEventListener(
+      'resize',
+      handleGalleryChat
+    );
 
   </script>
 </body>
