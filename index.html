@@ -6,8 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <meta name="color-scheme" content="light">
-
   <title>Imobiliária Rosana Melo | Porto Setúbal</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,13 +20,6 @@
   <link rel="shortcut icon" href="./assets/img/icones/apartamento.png" type="image/x-icon">
 
   <style>
-
-    html {
-
-      color-scheme: light;
-    
-    }
-    
     /* =========================================
     RESET E ESTRUTURA GLOBAL
     ========================================= */
@@ -59,7 +50,7 @@
 
       font-family: 'Inter', sans-serif;
 
-      background: #f7f6f2 !important;
+      background: var(--bg);
 
       color: var(--text);
 
@@ -570,7 +561,7 @@
 
       color: #fff;
 
-      padding: 14px 22px;
+      padding: 10px 18px;
 
       border-radius: 100px;
 
@@ -1709,8 +1700,8 @@
     }
 
     /* =========================================
-    FIX MENU MOBILE
-    ========================================= */
+FIX MENU MOBILE
+========================================= */
 
     header {
 
@@ -1750,33 +1741,6 @@
       z-index: 1;
 
     }
-
-    /* =========================================
-    BOTÕES HERO MOBILE
-    ========================================= */
-
-  @media(max-width: 768px) {
-
-  .hero-buttons {
-
-    gap: 12px;
-
-  }
-
-  .hero-buttons .btn {
-
-    font-size: 13px;
-
-    padding: 0 18px;
-
-    height: 54px;
-
-    white-space: nowrap;
-
-  }
-
-}
-    
   </style>
 
 </head>
@@ -2194,17 +2158,17 @@
 
         </div>
 
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm">
 
-          <input type="text" placeholder="Seu nome">
+          <input type="text" name="nome" placeholder="Seu nome" required>
 
-          <input type="tel" placeholder="Seu WhatsApp">
+          <input type="tel" name="telefone" placeholder="Seu WhatsApp" required>
 
-          <input type="email" placeholder="Seu e-mail">
+          <input type="email" name="email" placeholder="Seu e-mail" required>
 
-          <textarea placeholder="Mensagem"></textarea>
+          <textarea name="mensagem" placeholder="Mensagem"></textarea>
 
-          <button class="btn btn-primary" style="width:100%;">
+          <button type="submit" class="btn btn-primary" style="width:100%;">
             Solicitar atendimento
           </button>
 
@@ -2688,6 +2652,65 @@
     window.addEventListener('resize', toggleMobileBar);
 
     toggleMobileBar();
+
+    /* =========================================
+ FORMULÁRIO GOOGLE SHEETS
+ ========================================= */
+
+    const form =
+      document.getElementById('contactForm');
+
+    form.addEventListener('submit', async (e) => {
+
+      e.preventDefault();
+
+      const button =
+        form.querySelector('button');
+
+      const originalText =
+        button.innerHTML;
+
+      button.innerHTML = 'Enviando...';
+
+      button.disabled = true;
+
+      const formData = new FormData();
+
+      formData.append('nome', form.nome.value);
+
+      formData.append('telefone', form.telefone.value);
+
+      formData.append('email', form.email.value);
+
+      formData.append('mensagem', form.mensagem.value);
+
+      try {
+
+        await fetch('https://script.google.com/macros/s/AKfycbyQDr6b0y8-HNaNbKx8-JITj8mraC2H_IcklE3m7bubkYXaY5QraEzuLYsGCveDsygt/exec', {
+
+          method: 'POST',
+
+          body: formData
+
+        });
+
+        alert('Mensagem enviada com sucesso!');
+
+        form.reset();
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert('Erro ao enviar formulário.');
+
+      }
+
+      button.innerHTML = originalText;
+
+      button.disabled = false;
+
+    });
 
   </script>
 </body>
